@@ -1,0 +1,1424 @@
+
+{
+	"info": {
+		"_postman_id": "683c37e2-6196-4fba-9260-39b8ed3e8154",
+		"name": "Site management API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Channel",
+			"item": [
+				{
+					"name": "Get all channels",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"channelId\", jsonData[0].id);",
+									"postman.setEnvironmentVariable(\"channelId\", jsonData[0].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get channel",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"channelId\", jsonData.id);",
+									"postman.setEnvironmentVariable(\"channelId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "brxsaas"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get channel project",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"channelId\", jsonData.id);",
+									"postman.setEnvironmentVariable(\"channelId\", jsonData.id);",
+									"",
+									"var version = postman.getResponseHeader(\"X-Resource-Version\");",
+									"pm.environment.set(\"channelVersion\", version);",
+									"postman.setEnvironmentVariable(\"channelVersion\", version);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}",
+									"description": "Check channelId variable value"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put channel project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var version = postman.getResponseHeader(\"X-Resource-Version\");",
+									"pm.environment.set(\"channelVersion\", version);",
+									"postman.setEnvironmentVariable(\"channelVersion\", version);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Resource-Version",
+								"value": "{{channelVersion}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{channelId}}\",\n  \"name\": \"BrX SaaS RENAMED\",\n  \"contentRootPath\": null,\n  \"defaultDevice\": null,\n  \"responseHeaders\": {\n    \"key\": \"value\"\n  },\n  \"linkurlPrefix\": null,\n  \"cdnHost\": null\n}"
+						},
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get channel fieldgroups",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/fieldgroups",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"fieldgroups"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put channel fieldgroup",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"group-key\",\n  \"parameters\": [\n    \"smAccountId\"\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/fieldgroups/group-key",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"fieldgroups",
+								"group-key"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get channel fieldgroup",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/fieldgroups/group-key",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"fieldgroups",
+								"group-key"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete channel fieldgroup",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/fieldgroups/group-key",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"fieldgroups",
+								"group-key"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get channel parameters",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/parameters",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"parameters"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get channel parameter",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/parameters/smAccountId",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"parameters",
+								"smAccountId"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put channel parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var version = postman.getResponseHeader(\"X-Resource-Version\");",
+									"pm.environment.set(\"channelVersion\", version);",
+									"postman.setEnvironmentVariable(\"channelVersion\", version);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Resource-Version",
+								"value": "{{channelVersion}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"smAccountId\",\n    \"valueType\": \"string\",\n    \"required\": true,\n    \"hidden\": false,\n    \"overlay\": false,\n    \"defaultValue\": \"\",\n    \"displayName\": \"brSM Account ID RENAMED\",\n    \"system\": false,\n    \"config\": null\n}"
+						},
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/parameters/smAccountId",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"parameters",
+								"smAccountId"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete channel parameter",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/parameters/smAccountId",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"parameters",
+								"smAccountId"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Route",
+			"item": [
+				{
+					"name": "Get all routes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/routes",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"routes"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get route",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var version = postman.getResponseHeader(\"X-Resource-Version\");",
+									"pm.environment.set(\"routeVersion\", version);",
+									"postman.setEnvironmentVariable(\"routeVersion\", version);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/routes/articles",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"routes",
+								"articles"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put route",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var version = postman.getResponseHeader(\"X-Resource-Version\");",
+									"pm.environment.set(\"routeVersion\", version);",
+									"postman.setEnvironmentVariable(\"routeVersion\", version);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Resource-Version",
+								"value": "{{routeVersion}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"articles\",\n    \"layout\": null,\n    \"pageTitle\": \"ADDED page title\",\n    \"relativeContentPath\": \"pages/articles\",\n    \"referenceId\": null,\n    \"parameters\": {},\n    \"doctypePages\": {},\n    \"items\": [\n        {\n            \"name\": \"_any_\",\n            \"layout\": \"content\",\n            \"pageTitle\": null,\n            \"relativeContentPath\": \"content/articles/${1}\",\n            \"referenceId\": null,\n            \"parameters\": {},\n            \"doctypePages\": {},\n            \"items\": []\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/routes/articles",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"routes",
+								"articles"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete route",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/routes/articles",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"routes",
+								"articles"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Layout",
+			"item": [
+				{
+					"name": "Get all layouts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/layouts",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"layouts"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get layout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var version = postman.getResponseHeader(\"X-Resource-Version\");",
+									"pm.environment.set(\"layoutVersion\", version);",
+									"postman.setEnvironmentVariable(\"layoutVersion\", version);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/layouts/product",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"layouts",
+								"product"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put layout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var version = postman.getResponseHeader(\"X-Resource-Version\");",
+									"pm.environment.set(\"layoutVersion\", version);",
+									"postman.setEnvironmentVariable(\"layoutVersion\", version);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Resource-Version",
+								"value": "{{layoutVersion}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"product\",\n    \"label\": \"ADDED LABEL\",\n    \"description\": null,\n    \"parameters\": {},\n    \"type\": \"page\",\n    \"extends\": \"base\",\n    \"components\": [\n        {\n            \"name\": \"main\",\n            \"label\": null,\n            \"description\": null,\n            \"parameters\": {},\n            \"xtype\": null,\n            \"definition\": null,\n            \"components\": [\n                {\n                    \"name\": \"container\",\n                    \"label\": null,\n                    \"description\": null,\n                    \"parameters\": {},\n                    \"xtype\": \"hst.nomarkup\",\n                    \"type\": \"managed\"\n                }\n            ],\n            \"type\": \"static\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/layouts/product",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"layouts",
+								"product"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete layout",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/layouts/product",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"layouts",
+								"product"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Component group",
+			"item": [
+				{
+					"name": "Get all component groups",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/component_groups",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"component_groups"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get component group",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/component_groups/sample",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"component_groups",
+								"sample"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put component group",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Resource-Version",
+								"value": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"sample\",\n    \"hidden\": false,\n    \"system\": false\n}"
+						},
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/component_groups/sample",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"component_groups",
+								"sample"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete component group",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Resource-Version",
+								"value": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/component_groups/sample",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"component_groups",
+								"sample"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Component",
+			"item": [
+				{
+					"name": "Get all components",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/component_groups",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"component_groups"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get component",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var version = postman.getResponseHeader(\"X-Resource-Version\");",
+									"pm.environment.set(\"componentVersion\", version);",
+									"postman.setEnvironmentVariable(\"componentVersion\", version);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/component_groups/sample/components/single-banner-carousel",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"component_groups",
+								"sample",
+								"components",
+								"single-banner-carousel"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put component",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var version = postman.getResponseHeader(\"X-Resource-Version\");",
+									"pm.environment.set(\"componentVersion\", version);",
+									"postman.setEnvironmentVariable(\"componentVersion\", version);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Resource-Version",
+								"value": "{{componentVersion}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"sample/single-banner-carousel\",\n    \"extends\": \"base/component\",\n    \"hidden\": false,\n    \"system\": false,\n    \"xtype\": null,\n    \"ctype\": \"SingleBannerCarousel\",\n    \"label\": \"Banner carousel RENAMED\",\n    \"icon\": \"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNDBweCIgaGVpZ2h0PSI0MHB4IiB2aWV3Qm94PSIwIDAgNDAgNDAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgc3R5bGU9ImJhY2tncm91bmQ6ICNGRkZGRkY7Ij4KICAgIDx0aXRsZT5pY29uL2Jhbm5lci1jYXJvdXNlbDwvdGl0bGU+CiAgICA8ZGVmcz4KICAgICAgICA8cmVjdCBpZD0icGF0aC0xIiB4PSIxIiB5PSIxIiB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIHJ4PSIyIj48L3JlY3Q+CiAgICA8L2RlZnM+CiAgICA8ZyBpZD0iaWNvbi9iYW5uZXItY2Fyb3VzZWwiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxyZWN0IGZpbGw9IiNGRkZGRkYiIHg9IjAiIHk9IjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PC9yZWN0PgogICAgICAgIDxtYXNrIGlkPSJtYXNrLTIiIGZpbGw9IndoaXRlIj4KICAgICAgICAgICAgPHVzZSB4bGluazpocmVmPSIjcGF0aC0xIj48L3VzZT4KICAgICAgICA8L21hc2s+CiAgICAgICAgPHJlY3Qgc3Ryb2tlPSIjRThFOEVBIiB4PSIwLjUiIHk9IjAuNSIgd2lkdGg9IjM5IiBoZWlnaHQ9IjM5IiByeD0iMiI+PC9yZWN0PgogICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUiIGZpbGw9IiMwMEI1RTIiIG1hc2s9InVybCgjbWFzay0yKSIgeD0iNSIgeT0iNSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjMwIiByeD0iMiI+PC9yZWN0PgogICAgICAgIDxwb2x5bGluZSBpZD0iUGF0aC00IiBzdHJva2U9IiNGRkZGRkYiIG1hc2s9InVybCgjbWFzay0yKSIgcG9pbnRzPSIxMS41IDE3IDkgMTkuNSAxMS41IDIyIj48L3BvbHlsaW5lPgogICAgICAgIDxwb2x5bGluZSBpZD0iUGF0aC00LUNvcHkiIHN0cm9rZT0iI0ZGRkZGRiIgbWFzaz0idXJsKCNtYXNrLTIpIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMC4yNTAwMDAsIDE5LjUwMDAwMCkgc2NhbGUoLTEsIDEpIHRyYW5zbGF0ZSgtMzAuMjUwMDAwLCAtMTkuNTAwMDAwKSAiIHBvaW50cz0iMzEuNSAxNyAyOSAxOS41IDMxLjUgMjIiPjwvcG9seWxpbmU+CiAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZS1Db3B5LTYiIGZpbGw9IiNGRkZGRkYiIG1hc2s9InVybCgjbWFzay0yKSIgeD0iMTQiIHk9IjMwIiB3aWR0aD0iMTIiIGhlaWdodD0iMSI+PC9yZWN0PgogICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUtQ29weS03IiBmaWxsPSIjRkZGRkZGIiBtYXNrPSJ1cmwoI21hc2stMikiIHg9IjE0IiB5PSIyNiIgd2lkdGg9IjEyIiBoZWlnaHQ9IjEiPjwvcmVjdD4KICAgIDwvZz4KPC9zdmc+\",\n    \"parameters\": [\n        {\n            \"name\": \"alignment\",\n            \"valueType\": \"string\",\n            \"required\": false,\n            \"hidden\": false,\n            \"overlay\": false,\n            \"defaultValue\": \"center\",\n            \"displayName\": null,\n            \"system\": false,\n            \"config\": {\n                \"value\": [\n                    \"left\",\n                    \"center\",\n                    \"right\"\n                ],\n                \"valueListProvider\": null,\n                \"sourceId\": null,\n                \"type\": \"dropdown\"\n            }\n        },\n        {\n            \"name\": \"document1\",\n            \"valueType\": \"string\",\n            \"required\": true,\n            \"hidden\": false,\n            \"overlay\": false,\n            \"defaultValue\": \"\",\n            \"displayName\": null,\n            \"system\": false,\n            \"config\": {\n                \"pickerConfiguration\": \"cms-pickers/documents-only\",\n                \"pickerInitialPath\": \"banners\",\n                \"pickerRememberLastVisited\": true,\n                \"pickerSelectableNodeTypes\": [\n                    \"banner\"\n                ],\n                \"relative\": true,\n                \"pickerRootPath\": null,\n                \"type\": \"contentpath\"\n            }\n        },\n        {\n            \"name\": \"document2\",\n            \"valueType\": \"string\",\n            \"required\": false,\n            \"hidden\": false,\n            \"overlay\": false,\n            \"defaultValue\": \"\",\n            \"displayName\": null,\n            \"system\": false,\n            \"config\": {\n                \"pickerConfiguration\": \"cms-pickers/documents-only\",\n                \"pickerInitialPath\": \"banners\",\n                \"pickerRememberLastVisited\": true,\n                \"pickerSelectableNodeTypes\": [\n                    \"banner\"\n                ],\n                \"relative\": true,\n                \"pickerRootPath\": null,\n                \"type\": \"contentpath\"\n            }\n        },\n        {\n            \"name\": \"document3\",\n            \"valueType\": \"string\",\n            \"required\": false,\n            \"hidden\": false,\n            \"overlay\": false,\n            \"defaultValue\": \"\",\n            \"displayName\": null,\n            \"system\": false,\n            \"config\": {\n                \"pickerConfiguration\": \"cms-pickers/documents-only\",\n                \"pickerInitialPath\": \"banners\",\n                \"pickerRememberLastVisited\": true,\n                \"pickerSelectableNodeTypes\": [\n                    \"banner\"\n                ],\n                \"relative\": true,\n                \"pickerRootPath\": null,\n                \"type\": \"contentpath\"\n            }\n        },\n        {\n            \"name\": \"document4\",\n            \"valueType\": \"string\",\n            \"required\": false,\n            \"hidden\": false,\n            \"overlay\": false,\n            \"defaultValue\": \"\",\n            \"displayName\": null,\n            \"system\": false,\n            \"config\": {\n                \"pickerConfiguration\": \"cms-pickers/documents-only\",\n                \"pickerInitialPath\": \"banners\",\n                \"pickerRememberLastVisited\": true,\n                \"pickerSelectableNodeTypes\": [\n                    \"banner\"\n                ],\n                \"relative\": true,\n                \"pickerRootPath\": null,\n                \"type\": \"contentpath\"\n            }\n        },\n        {\n            \"name\": \"document5\",\n            \"valueType\": \"string\",\n            \"required\": false,\n            \"hidden\": false,\n            \"overlay\": false,\n            \"defaultValue\": \"\",\n            \"displayName\": null,\n            \"system\": false,\n            \"config\": {\n                \"pickerConfiguration\": \"cms-pickers/documents-only\",\n                \"pickerInitialPath\": \"banners\",\n                \"pickerRememberLastVisited\": true,\n                \"pickerSelectableNodeTypes\": [\n                    \"banner\"\n                ],\n                \"relative\": true,\n                \"pickerRootPath\": null,\n                \"type\": \"contentpath\"\n            }\n        },\n        {\n            \"name\": \"interval\",\n            \"valueType\": \"integer\",\n            \"required\": false,\n            \"hidden\": false,\n            \"overlay\": false,\n            \"defaultValue\": 0,\n            \"displayName\": null,\n            \"system\": false,\n            \"config\": null\n        }\n    ],\n    \"fieldGroups\": [\n        {\n            \"name\": \"appearance\",\n            \"parameters\": [\n                \"alignment\",\n                \"interval\"\n            ]\n        },\n        {\n            \"name\": \"documents\",\n            \"parameters\": [\n                \"document1\",\n                \"document2\",\n                \"document3\",\n                \"document4\",\n                \"document5\"\n            ]\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/component_groups/sample/components/single-banner-carousel",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"component_groups",
+								"sample",
+								"components",
+								"single-banner-carousel"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete component",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/component_groups/sample/components/single-banner-carousel",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"component_groups",
+								"sample",
+								"components",
+								"single-banner-carousel"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Menu",
+			"item": [
+				{
+					"name": "Get all menus",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/menus",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"menus"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get menu",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/menus/main",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"menus",
+								"main"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put menu",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/menus/main",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"menus",
+								"main"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete menu",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{brxHost}}/management/site/v1/channels/:channelId/menus/main2",
+							"host": [
+								"{{brxHost}}"
+							],
+							"path": [
+								"management",
+								"site",
+								"v1",
+								"channels",
+								":channelId",
+								"menus",
+								"main2"
+							],
+							"variable": [
+								{
+									"key": "channelId",
+									"value": "{{channelId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "vLOyhcLfbtkzJcPoUMhXHxpLmusWkeZJXwERwOotggyrzSQSfCuzLAeVNnKcqVCp",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "x-auth-token",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
