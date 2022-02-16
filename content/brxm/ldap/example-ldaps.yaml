@@ -1,0 +1,44 @@
+/hippo:configuration/hippo:security/ldaps:
+  jcr:primaryType: hippoldap:securityprovider
+  hippoldap:authentication: simple
+  hippoldap:credentials: secret
+  hippoldap:initialfactory: com.sun.jndi.ldap.LdapCtxFactory
+  hippoldap:principal: cn=ldapadmin,dc=onehippo,dc=org
+  hippoldap:providerurl: ldaps://127.0.0.1:636
+  hippoldap:searchbase: dc=onehippo,dc=org
+  hipposys:classname: org.hippoecm.repository.security.ldap.LdapSecurityProvider
+  /hipposys:userprovider:
+    jcr:primaryType: hippoldap:userprovider
+    /hippoldap:search:
+      jcr:primaryType: hippoldap:usersearch
+      hippoldap:basedn: ou=People,dc=onehippo,dc=org
+      hippoldap:filter: (cn=*)
+      hippoldap:nameattribute: uid
+    /hippoldap:mapping[1]:
+      jcr:primaryType: hippoldap:mapping
+      hippoldap:multi: false
+      hippoldap:source: uid
+      hippoldap:target: ldapuid
+    /hippoldap:mapping[2]:
+      jcr:primaryType: hippoldap:mapping
+      hippoldap:multi: false
+      hippoldap:source: sn
+      hippoldap:target: lastname
+    /hippoldap:mapping[3]:
+      jcr:primaryType: hippoldap:mapping
+      hippoldap:multi: false
+      hippoldap:source: givenName
+      hippoldap:target: firstname
+  /hipposys:groupprovider:
+    jcr:primaryType: hippoldap:groupprovider
+    /hippoldap:search:
+      jcr:primaryType: hippoldap:groupsearch
+      hippoldap:basedn: ou=Groups,dc=onehippo,dc=org
+      hippoldap:filter: (cn=*)
+      hippoldap:nameattribute: cn
+      hippoldap:membernamematcher: <uid>
+    /hippoldap:mapping:
+      jcr:primaryType: hippoldap:mapping
+      hippoldap:multi: false
+      hippoldap:source: description
+      hippoldap:target: description
