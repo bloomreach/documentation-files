@@ -1,519 +1,519 @@
 {
-	"info": {
-		"_postman_id": "a203bfa7-757d-4e59-8400-6b1a064ab993",
-		"name": "Content Type management API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "Content Type",
-			"item": [
-				{
-					"name": "Get all types (core)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"pm.environment.set(\"contentTypeName\", jsonData[0].name);",
-									"postman.setEnvironmentVariable(\"contentTypeName\", jsonData[0].name);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{brxHost}}/management/contenttypes/v1/core",
-							"host": [
-								"{{brxHost}}"
-							],
-							"path": [
-								"management",
-								"contenttypes",
-								"v1",
-								"core"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get all types (development)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"pm.environment.set(\"contentTypeName\", jsonData[0].name);",
-									"postman.setEnvironmentVariable(\"contentTypeName\", jsonData[0].name);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{brxHost}}/management/contenttypes/v1/development",
-							"host": [
-								"{{brxHost}}"
-							],
-							"path": [
-								"management",
-								"contenttypes",
-								"v1",
-								"development"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get content type (core)",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{brxHost}}/management/contenttypes/v1/core/:contentTypeName",
-							"host": [
-								"{{brxHost}}"
-							],
-							"path": [
-								"management",
-								"contenttypes",
-								"v1",
-								"core",
-								":contentTypeName"
-							],
-							"variable": [
-								{
-									"key": "contentTypeName",
-									"value": "{{contentTypeName}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get content type (development)",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var version = postman.getResponseHeader(\"X-Resource-Version\");",
-									"pm.environment.set(\"contentTypeVersion\", version);",
-									"postman.setEnvironmentVariable(\"contentTypeVersion\", version);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{brxHost}}/management/contenttypes/v1/development/:contentTypeName",
-							"host": [
-								"{{brxHost}}"
-							],
-							"path": [
-								"management",
-								"contenttypes",
-								"v1",
-								"development",
-								":contentTypeName"
-							],
-							"variable": [
-								{
-									"key": "contentTypeName",
-									"value": "{{contentTypeName}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Put content type (first example)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var version = postman.getResponseHeader(\"X-Resource-Version\");",
-									"pm.environment.set(\"contentTypeFirstExampleVersion\", version);",
-									"postman.setEnvironmentVariable(\"contentTypeFirstExampleVersion\", version);"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"var version = pm.environment.get(\"contentTypeFirstExampleVersion\");",
-									"if(version != null){",
-									"    pm.request.headers.add({",
-									"        key: \"X-Resource-Version\",",
-									"        value: version",
-									"    });",
-									"}",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"firstExample\",\n    \"type\": \"Document\",\n    \"enabled\": true,\n    \"presentation\": {\n        \"layout\": \"two-column\"\n    },\n    \"fields\": [\n        {\n            \"name\": \"string\",\n            \"required\": true,\n            \"multiple\": true,\n            \"type\": \"String\",\n            \"defaultValue\": [\n                \"Blogtitle1\",\n                \"Blogtitle2\"\n            ],\n            \"validations\": {\n                \"maxLength\": 10\n            },\n            \"presentation\": {\n                \"caption\": \"Title\",\n                \"hint\": \"Hint for string field\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"Simple\"\n            }\n        },\n        {\n            \"name\": \"text\",\n            \"required\": true,\n            \"multiple\": false,\n            \"type\": \"String\",\n            \"defaultValue\": [\n                \"Sample value text field\"\n            ],\n            \"validations\": {\n                \"maxRow\": 10\n            },\n            \"presentation\": {\n                \"caption\": \"Text Field\",\n                \"hint\": \"Hint for text field\",\n                \"layoutColumn\": 2,\n                \"displayType\": \"Text\"\n            }\n        },\n        {\n            \"name\": \"date\",\n            \"required\": true,\n            \"type\": \"Date\",\n            \"defaultValue\": [\n                \"2007-12-03T00:00:00.00Z\"\n            ],\n            \"presentation\": {\n                \"caption\": \"Date Field\",\n                \"hint\": \"Hint for date field\",\n                \"layoutColumn\": 2,\n                \"timeSelectable\": false\n            }\n        },\n        {\n            \"name\": \"dateWithTime\",\n            \"required\": true,\n            \"type\": \"Date\",\n            \"defaultValue\": [\n                \"2007-12-03T10:15:30.00Z\"\n            ],\n            \"presentation\": {\n                \"caption\": \"Date Field\",\n                \"hint\": \"Hint for date field with time\",\n                \"layoutColumn\": 2,\n                \"timeSelectable\": true\n            }\n        },\n        {\n            \"name\": \"booleanChekbox\",\n            \"required\": true,\n            \"type\": \"Boolean\",\n            \"defaultValue\": [\n                true\n            ],\n            \"presentation\": {\n                \"caption\": \"Boolean Field\",\n                \"hint\": \"Hint for boolean field\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"Checkbox\"\n            }\n        },\n        {\n            \"name\": \"integer\",\n            \"required\": true,\n            \"type\": \"Integer\",\n            \"defaultValue\": [\n                100\n            ],\n            \"presentation\": {\n                \"caption\": \"Integer Field\",\n                \"hint\": \"Hint for integer field\",\n                \"layoutColumn\": 2\n            }\n        },\n        {\n            \"name\": \"number\",\n            \"required\": true,\n            \"multiple\": true,\n            \"type\": \"Number\",\n            \"defaultValue\": [\n                100.34,\n                2.2\n            ],\n            \"presentation\": {\n                \"caption\": \"Number Field\",\n                \"hint\": \"Hint for number field\",\n                \"layoutColumn\": 2\n            }\n        },\n        {\n            \"name\": \"html\",\n            \"required\": true,\n            \"type\": \"Html\",\n            \"defaultValue\": [\n                \"<p>Sample content html field</p>\"\n            ],\n            \"presentation\": {\n                \"caption\": \"Html Field\",\n                \"hint\": \"Hint for html field\",\n                \"layoutColumn\": 2,\n                \"ckEditorAppendedJson\": \"{\\n  \\\"keystrokes\\\":[[88,\\\"showblocks\\\"]],\\n  \\\"plugins\\\":\\\"colorbutton\\\"\\n}\",\n                \"ckEditorOverlayedJson\": \"{\\n  \\\"codemirror\\\": {\\n    \\\"autoFormatOnStart\\\": false\\n  },\\n  \\\"ignoreEmptyParagraph\\\": true\\n}\"\n            }\n        },\n        {\n            \"name\": \"richText\",\n            \"required\": false,\n            \"type\": \"RichText\",\n            \"defaultValue\": [\n                \"<p>Sample content rich text field</p>\"\n            ],\n            \"presentation\": {\n                \"caption\": \"Content\",\n                \"hint\": \"Hint for rich text field\",\n                \"layoutColumn\": 1,\n                \"imagepickerType\": \"images\",\n                \"imagepickerNodetypes\": [\n                    \"folder\",\n                    \"banner\"\n                ],\n                \"imagepickerLastVisitedEnabled\": true,\n                \"imagepickerLastVisitedGroupKey\": \"ckeditor-imagepicker\",\n                \"imagepickerLastVisitedNodetypes\": [\n                    \"gallery\",\n                    \"banner\"\n                ],\n                \"imagepickerPreferredImageVariant\": \"original\",\n                \"imagepickerBasePath\": \"/content/gallery/brxsaas/images\",\n                \"linkpickerType\": \"documents\",\n                \"linkpickerNodetypes\": [\n                    \"folder\",\n                    \"banner\"\n                ],\n                \"linkpickerLastVisitedEnabled\": true,\n                \"linkpickerLastVisitedGroupKey\": \"ckeditor-linkpicker\",\n                \"linkpickerLastVisitedNodetypes\": [\n                    \"folder\"\n                ],\n                \"linkPickerLanguageContextAware\": true,\n                \"linkPickerOpenInNewWindowEnabled\": true\n            }\n        },\n        {\n            \"name\": \"dropdownWithStaticValues\",\n            \"required\": true,\n            \"type\": \"SelectableString\",\n            \"defaultValue\": [\n                \"01\"\n            ],\n            \"validations\": {\n                \"inValues\": [\n                    {\n                        \"key\": \"01\",\n                        \"label\": \"New\"\n                    },\n                    {\n                        \"key\": \"02\",\n                        \"label\": \"Open\"\n                    },\n                    {\n                        \"key\": \"03\",\n                        \"label\": \"Closed\"\n                    }\n                ]\n            },\n            \"presentation\": {\n                \"caption\": \"Static dropdown Field\",\n                \"hint\": \"Hint for dropdown field\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"Dropdown\"\n            }\n        },\n        {\n            \"name\": \"staticRadiogroupOnBoolean\",\n            \"required\": false,\n            \"type\": \"Boolean\",\n            \"defaultValue\": [\n                \"false\"\n            ],\n            \"validations\": {\n                \"inValues\": [\n                    \"Open\",\n                    \"Closed\"\n                ]\n            },\n            \"presentation\": {\n                \"caption\": \"Radiogroup field\",\n                \"hint\": \"Hint for static radiogroup field on boolean\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"RadioGroup\"\n            }\n        },\n        {\n            \"name\": \"imageLink\",\n            \"required\": false,\n            \"type\": \"Link\",\n            \"defaultValue\": [\n                \"/\"\n            ],\n            \"presentation\": {\n                \"caption\": \"Image\",\n                \"hint\": \"Hint for image link field\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"ImageLink\",\n                \"lastVisitedKey\": \"gallerypicker-imagelink\",\n                \"lastVisitedEnabled\": true,\n                \"uploadEnabled\": true\n            }\n        },\n        {\n            \"name\": \"link\",\n            \"required\": false,\n            \"type\": \"Link\",\n            \"defaultValue\": [\n                \"/content/documents/brxsaas/pages/about\"\n            ],\n            \"presentation\": {\n                \"caption\": \"Link\",\n                \"hint\": \"Hint for link field\",\n                \"layoutColumn\": 2,\n                \"displayType\": \"AnyLink\",\n                \"lookupFolderPath\": \"/content/documents/brxsaas/banners\",\n                \"lookupFolderTypes\": [\n                    \"folder\"\n                ],\n                \"lastVisitedNodetypes\": [\n                    \"folder\"\n                ],\n                \"lastVisitedEnabled\": true,\n                \"languageContextAware\": true,\n                \"pickerType\": \"documents\"\n            }\n        },\n        {\n            \"name\": \"resource\",\n            \"required\": true,\n            \"type\": \"EmbeddedResource\",\n            \"defaultValue\": [\n                {\n                    \"filename\": \"hippo:resource\",\n                    \"binarydata\": \"/9j/4AAQSkZJRgABAQAAFAAUAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAAAUAAAAAQAAABQAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAAigAwAEAAAAAQAAAAUAAAAA/+0AOFBob3Rvc2hvcCAzLjAAOEJJTQQEAAAAAAAAOEJJTQQlAAAAAAAQ1B2M2Y8AsgTpgAmY7PhCfv/AABEIAAUACAMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/3QAEAAH/2gAMAwEAAhEDEQA/APrD4kfAXwl46KapdRwm7uHw0l9b/bDHkjPlFmDRjAxtB289OueI/wCGPPB3/P3p3/gmT/45X0Hdf8eVr/11FNrCtlmGrTc5J38pSX4JpG1PGVYxS0frGLf3tNn/2Q==\",\n                    \"mimeType\": \"application/json\"\n                }\n            ],\n            \"presentation\": {\n                \"caption\": \"Resource Field\",\n                \"hint\": \"Hint for resource field\",\n                \"layoutColumn\": 2\n            }\n        }\n    ]\n}"
-						},
-						"url": {
-							"raw": "{{brxHost}}/management/contenttypes/v1/development/firstExample",
-							"host": [
-								"{{brxHost}}"
-							],
-							"path": [
-								"management",
-								"contenttypes",
-								"v1",
-								"development",
-								"firstExample"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Put content type (second example)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var version = postman.getResponseHeader(\"X-Resource-Version\");",
-									"pm.environment.set(\"contentTypeSecondExampleVersion\", version);",
-									"postman.setEnvironmentVariable(\"contentTypeSecondExampleVersion\", version);"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"var version = pm.environment.get(\"contentTypeSecondExampleVersion\");",
-									"if(version != null){",
-									"    pm.request.headers.add({",
-									"        key: \"X-Resource-Version\",",
-									"        value: version",
-									"    });",
-									"}",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"secondExample\",\n    \"type\": \"Document\",\n    \"enabled\": true,\n    \"presentation\": {\n        \"layout\": \"two-column\"\n    },\n    \"fields\": [\n        {\n            \"name\": \"dropdownWithResourceBundle\",\n            \"required\": true,\n            \"type\": \"SelectableString\",\n            \"defaultValue\": [\n                \"key1\"\n            ],\n            \"validations\": {\n                \"inResourceBundle\": \"brsm.example.bundle\"\n            },\n            \"presentation\": {\n                \"caption\": \"Dynamic dropdown field\",\n                \"hint\": \"Hint for dynamic dropdown field\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"Dropdown\",\n                \"sortOrder\": \"ascending\",\n                \"sortBy\": \"key\",\n                \"showDefault\": true\n            }\n        },\n        {\n            \"name\": \"radiogroup\",\n            \"required\": true,\n            \"type\": \"SelectableString\",\n            \"validations\": {\n                \"inResourceBundle\": \"brsm.example.bundle\"\n            },\n            \"presentation\": {\n                \"caption\": \"Radiogroup field\",\n                \"hint\": \"Hint for radio group field\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"RadioGroup\",\n                \"orientation\": \"horizontal\"\n            }\n        },\n        {\n            \"name\": \"radiogroupOnBoolean\",\n            \"required\": true,\n            \"type\": \"Boolean\",\n            \"defaultValue\": [\n                \"false\"\n            ],\n            \"validations\": {\n                \"inResourceBundle\": \"boolean.resource.bundle\"\n            },\n            \"presentation\": {\n                \"caption\": \"Radiogroup field\",\n                \"hint\": \"Hint for radiogroup field on boolean\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"RadioGroup\",\n                \"orientation\": \"vertical\"\n            }\n        },\n        {\n            \"name\": \"multiselectfieldWithResourceBundle\",\n            \"required\": true,\n            \"multiple\": true,\n            \"type\": \"SelectableString\",\n            \"defaultValue\": [\n                \"key1\",\n                \"key2\"\n            ],\n            \"validations\": {\n                \"inResourceBundle\": \"brsm.example.bundle\"\n            },\n            \"presentation\": {\n                \"caption\": \"Multiselect field\",\n                \"hint\": \"Hint for mmultiselect field with resource bundle\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"MultiSelect\",\n                \"multiSelectType\": \"selectlist\",\n                \"maxRowWithoutScrollbar\": 2,\n                \"multiSelectAllowOrder\": true\n            }\n        },\n        {\n            \"name\": \"taxonomyField\",\n            \"required\": true,\n            \"multiple\": true,\n            \"type\": \"Taxonomy\",\n            \"defaultValue\": [\n                \"category1\"\n            ],\n            \"validations\": {\n                \"inTaxonomy\": \"testTaxonomy\"\n            },\n            \"presentation\": {\n                \"caption\": \"Taxonomy Field\",\n                \"hint\": \"Hint for Taxonomy field\",\n                \"layoutColumn\": 2\n            }\n        }\n    ]\n}"
-						},
-						"url": {
-							"raw": "{{brxHost}}/management/contenttypes/v1/development/secondExample",
-							"host": [
-								"{{brxHost}}"
-							],
-							"path": [
-								"management",
-								"contenttypes",
-								"v1",
-								"development",
-								"secondExample"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Put fieldgroup aFieldGroupType",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"aFieldGroupType\",\n    \"type\": \"FieldGroup\",\n    \"enabled\": true,\n    \"presentation\": {\n        \"layout\": \"one-column\"\n    },\n    \"fields\": [\n        {\n            \"name\": \"title\",\n            \"type\": \"String\",\n            \"required\": false,\n            \"multiple\": false,\n            \"presentation\": {\n                \"caption\": \"Title\",\n                \"hint\": \"\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"Simple\"\n            },\n            \"validations\": {\n                \"maxLength\": null\n            },\n            \"defaultValue\": [\n                \"A default title\"\n            ]\n        },\n        {\n            \"name\": \"calendardate\",\n            \"type\": \"Date\",\n            \"required\": false,\n            \"multiple\": false,\n            \"presentation\": {\n                \"caption\": \"Calendar Date\",\n                \"hint\": \"\",\n                \"layoutColumn\": 1,\n                \"timeSelectable\": false\n            },\n            \"defaultValue\": [\n                \"2021-10-06T22:00:00Z\"\n            ]\n        }\n    ]\n}"
-						},
-						"url": {
-							"raw": "{{brxHost}}/management/contenttypes/v1/development/aFieldGroupType",
-							"host": [
-								"{{brxHost}}"
-							],
-							"path": [
-								"management",
-								"contenttypes",
-								"v1",
-								"development",
-								"aFieldGroupType"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Put fieldgroup aFieldGroupWithFieldGroupType",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"aFieldGroupWithFieldGroupType\",\n    \"type\": \"FieldGroup\",\n    \"enabled\": true,\n    \"presentation\": {\n        \"layout\": \"one-column\"\n    },\n    \"fields\": [\n        {\n            \"name\": \"title\",\n            \"type\": \"String\",\n            \"required\": false,\n            \"multiple\": false,\n            \"presentation\": {\n                \"caption\": \"Title\",\n                \"hint\": \"\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"Simple\"\n            },\n            \"validations\": {\n                \"maxLength\": null\n            },\n            \"defaultValue\": [\n                \"Top level title\"\n            ]\n        },\n        {\n            \"name\": \"aFieldGroupField\",\n            \"type\": \"FieldGroup\",\n            \"required\": false,\n            \"multiple\": false,\n            \"presentation\": {\n                \"caption\": \"A FieldGroup field\",\n                \"hint\": \"\",\n                \"layoutColumn\": 1\n            },\n            \"defaultValue\": [\n                {\n                    \"fields\": {\n                        \"title\": [\n                            \"A different default title\"\n                        ],\n                        \"calendardate\": [\n                            \"2022-02-08T23:00:00Z\"\n                        ]\n                    }\n                }\n            ],\n            \"fieldGroupType\": \"aFieldGroupType\"\n        }\n    ]\n}"
-						},
-						"url": {
-							"raw": "{{brxHost}}/management/contenttypes/v1/development/aFieldGroupWithFieldGroupType",
-							"host": [
-								"{{brxHost}}"
-							],
-							"path": [
-								"management",
-								"contenttypes",
-								"v1",
-								"development",
-								"aFieldGroupWithFieldGroupType"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Put content type (third example)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var version = postman.getResponseHeader(\"X-Resource-Version\");",
-									"pm.environment.set(\"contentTypeThirdExampleVersion\", version);",
-									"postman.setEnvironmentVariable(\"contentTypeThirdExampleVersion\", version);"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"var version = pm.environment.get(\"contentTypeThirdExampleVersion\");",
-									"if(version != null){",
-									"    pm.request.headers.add({",
-									"        key: \"X-Resource-Version\",",
-									"        value: version",
-									"    });",
-									"}",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"thirdExample\",\n    \"type\": \"Document\",\n    \"enabled\": true,\n    \"presentation\": {\n        \"layout\": \"two-column\"\n    },\n    \"fields\": [\n        {\n            \"name\": \"aFieldGroupField\",\n            \"type\": \"FieldGroup\",\n            \"required\": false,\n            \"multiple\": false,\n            \"fieldGroupType\": \"aFieldGroupType\",\n            \"presentation\": {\n                \"caption\": \"A FieldGroup field\",\n                \"hint\": \"Hint for FieldGroup field\",\n                \"layoutColumn\": 1\n            },\n            \"defaultValue\": [\n                {\n                    \"fields\": {\n                        \"title\": [\n                            \"A default title\"\n                        ],\n                        \"calendardate\": [\n                            \"2021-10-06T22:00:00Z\"\n                        ]\n                    }\n                }\n            ]\n        },\n        {\n            \"name\": \"aFieldGroupWithFieldGroupField\",\n            \"type\": \"FieldGroup\",\n            \"required\": false,\n            \"multiple\": false,\n            \"fieldGroupType\": \"aFieldGroupWithFieldGroupType\",\n            \"presentation\": {\n                \"caption\": \"A FieldGroupWithFieldGroup field\",\n                \"hint\": \"Hint for FieldGroupWithFieldGroup field\",\n                \"layoutColumn\": 1\n            },\n            \"defaultValue\": [\n                {\n                    \"fields\": {\n                        \"aFieldGroupField\": [\n                            {\n                                \"fields\": {\n                                    \"title\": [\n                                        \"A different default title\"\n                                    ],\n                                    \"calendardate\": [\n                                        \"2022-02-08T23:00:00Z\"\n                                    ]\n                                }\n                            }\n                        ],\n                        \"title\": [\n                            \"Top level title\"\n                        ]\n                    }\n                }\n            ]\n        },\n        {\n            \"name\": \"aSelectableFieldGroupField\",\n            \"type\": \"SelectableFieldGroup\",\n            \"required\": false,\n            \"multiple\": true,\n            \"fieldGroupTypes\": [\n                \"aFieldGroupType\",\n                \"aFieldGroupWithFieldGroupType\"\n            ],\n            \"presentation\": {\n                \"caption\": \"A SelectableFieldGroup field\",\n                \"hint\": \"Hint for SelectableFieldGroup field\",\n                \"layoutColumn\": 1,\n                \"contentPickerType\": \"links\",\n                \"showFieldGroupNames\": false\n            },\n            \"validations\": {\n                \"maxItem\": 10\n            },\n            \"defaultValue\": [\n                {\n                    \"fieldGroupType\": \"aFieldGroupType\",\n                    \"fields\": {\n                        \"title\": [\n                            \"A default title\"\n                        ],\n                        \"calendardate\": [\n                            \"2021-10-06T22:00:00Z\"\n                        ]\n                    }\n                },\n                {\n                    \"fieldGroupType\": \"aFieldGroupWithFieldGroupType\",\n                    \"fields\": {\n                        \"aFieldGroupField\": [\n                            {\n                                \"fields\": {\n                                    \"title\": [\n                                        \"A different default title\"\n                                    ],\n                                    \"calendardate\": [\n                                        \"2022-02-08T23:00:00Z\"\n                                    ]\n                                }\n                            }\n                        ],\n                        \"title\": [\n                            \"Top level title\"\n                        ]\n                    }\n                }\n            ]\n        }\n    ]\n}"
-						},
-						"url": {
-							"raw": "{{brxHost}}/management/contenttypes/v1/development/thirdExample",
-							"host": [
-								"{{brxHost}}"
-							],
-							"path": [
-								"management",
-								"contenttypes",
-								"v1",
-								"development",
-								"thirdExample"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			]
-		}
-	],
-	"auth": {
-		"type": "apikey",
-		"apikey": [
-			{
-				"key": "value",
-				"value": "changeme",
-				"type": "string"
-			},
-			{
-				"key": "key",
-				"value": "x-auth-token",
-				"type": "string"
-			}
-		]
-	},
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	]
+  "info": {
+    "_postman_id": "a203bfa7-757d-4e59-8400-6b1a064ab993",
+    "name": "Content Type management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Content Type",
+      "item": [
+        {
+          "name": "Get all types (core)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"contentTypeName\", jsonData[0].name);",
+                  "postman.setEnvironmentVariable(\"contentTypeName\", jsonData[0].name);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{brxHost}}/management/contenttypes/v1/core",
+              "host": [
+                "{{brxHost}}"
+              ],
+              "path": [
+                "management",
+                "contenttypes",
+                "v1",
+                "core"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all types (development)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"contentTypeName\", jsonData[0].name);",
+                  "postman.setEnvironmentVariable(\"contentTypeName\", jsonData[0].name);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{brxHost}}/management/contenttypes/v1/development",
+              "host": [
+                "{{brxHost}}"
+              ],
+              "path": [
+                "management",
+                "contenttypes",
+                "v1",
+                "development"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get content type (core)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{brxHost}}/management/contenttypes/v1/core/:contentTypeName",
+              "host": [
+                "{{brxHost}}"
+              ],
+              "path": [
+                "management",
+                "contenttypes",
+                "v1",
+                "core",
+                ":contentTypeName"
+              ],
+              "variable": [
+                {
+                  "key": "contentTypeName",
+                  "value": "{{contentTypeName}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get content type (development)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var version = postman.getResponseHeader(\"X-Resource-Version\");",
+                  "pm.environment.set(\"contentTypeVersion\", version);",
+                  "postman.setEnvironmentVariable(\"contentTypeVersion\", version);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{brxHost}}/management/contenttypes/v1/development/:contentTypeName",
+              "host": [
+                "{{brxHost}}"
+              ],
+              "path": [
+                "management",
+                "contenttypes",
+                "v1",
+                "development",
+                ":contentTypeName"
+              ],
+              "variable": [
+                {
+                  "key": "contentTypeName",
+                  "value": "{{contentTypeName}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Put content type (first example)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var version = postman.getResponseHeader(\"X-Resource-Version\");",
+                  "pm.environment.set(\"contentTypeFirstExampleVersion\", version);",
+                  "postman.setEnvironmentVariable(\"contentTypeFirstExampleVersion\", version);"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "var version = pm.environment.get(\"contentTypeFirstExampleVersion\");",
+                  "if(version != null){",
+                  "    pm.request.headers.add({",
+                  "        key: \"X-Resource-Version\",",
+                  "        value: version",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"firstExample\",\n    \"type\": \"Document\",\n    \"enabled\": true,\n    \"presentation\": {\n        \"layout\": \"two-column\",\n        \"displayName\": \"First Example\"\n    },\n    \"fields\": [\n        {\n            \"name\": \"string\",\n            \"required\": true,\n            \"multiple\": true,\n            \"type\": \"String\",\n            \"defaultValue\": [\n                \"Blogtitle1\",\n                \"Blogtitle2\"\n            ],\n            \"validations\": {\n                \"maxLength\": 10\n            },\n            \"presentation\": {\n                \"caption\": \"Title\",\n                \"hint\": \"Hint for string field\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"Simple\"\n            }\n        },\n        {\n            \"name\": \"text\",\n            \"required\": true,\n            \"multiple\": false,\n            \"type\": \"String\",\n            \"defaultValue\": [\n                \"Sample value text field\"\n            ],\n            \"validations\": {\n                \"maxRow\": 10\n            },\n            \"presentation\": {\n                \"caption\": \"Text Field\",\n                \"hint\": \"Hint for text field\",\n                \"layoutColumn\": 2,\n                \"displayType\": \"Text\"\n            }\n        },\n        {\n            \"name\": \"date\",\n            \"required\": true,\n            \"type\": \"Date\",\n            \"defaultValue\": [\n                \"2007-12-03T00:00:00.00Z\"\n            ],\n            \"presentation\": {\n                \"caption\": \"Date Field\",\n                \"hint\": \"Hint for date field\",\n                \"layoutColumn\": 2,\n                \"timeSelectable\": false\n            }\n        },\n        {\n            \"name\": \"dateWithTime\",\n            \"required\": true,\n            \"type\": \"Date\",\n            \"defaultValue\": [\n                \"2007-12-03T10:15:30.00Z\"\n            ],\n            \"presentation\": {\n                \"caption\": \"Date Field\",\n                \"hint\": \"Hint for date field with time\",\n                \"layoutColumn\": 2,\n                \"timeSelectable\": true\n            }\n        },\n        {\n            \"name\": \"booleanChekbox\",\n            \"required\": true,\n            \"type\": \"Boolean\",\n            \"defaultValue\": [\n                true\n            ],\n            \"presentation\": {\n                \"caption\": \"Boolean Field\",\n                \"hint\": \"Hint for boolean field\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"Checkbox\"\n            }\n        },\n        {\n            \"name\": \"integer\",\n            \"required\": true,\n            \"type\": \"Integer\",\n            \"defaultValue\": [\n                100\n            ],\n            \"presentation\": {\n                \"caption\": \"Integer Field\",\n                \"hint\": \"Hint for integer field\",\n                \"layoutColumn\": 2\n            }\n        },\n        {\n            \"name\": \"number\",\n            \"required\": true,\n            \"multiple\": true,\n            \"type\": \"Number\",\n            \"defaultValue\": [\n                100.34,\n                2.2\n            ],\n            \"presentation\": {\n                \"caption\": \"Number Field\",\n                \"hint\": \"Hint for number field\",\n                \"layoutColumn\": 2\n            }\n        },\n        {\n            \"name\": \"html\",\n            \"required\": true,\n            \"type\": \"Html\",\n            \"defaultValue\": [\n                \"<p>Sample content html field</p>\"\n            ],\n            \"presentation\": {\n                \"caption\": \"Html Field\",\n                \"hint\": \"Hint for html field\",\n                \"layoutColumn\": 2,\n                \"ckEditorAppendedJson\": \"{\\n  \\\"keystrokes\\\":[[88,\\\"showblocks\\\"]],\\n  \\\"plugins\\\":\\\"colorbutton\\\"\\n}\",\n                \"ckEditorOverlayedJson\": \"{\\n  \\\"codemirror\\\": {\\n    \\\"autoFormatOnStart\\\": false\\n  },\\n  \\\"ignoreEmptyParagraph\\\": true\\n}\"\n            }\n        },\n        {\n            \"name\": \"richText\",\n            \"required\": false,\n            \"type\": \"RichText\",\n            \"defaultValue\": [\n                \"<p>Sample content rich text field</p>\"\n            ],\n            \"presentation\": {\n                \"caption\": \"Content\",\n                \"hint\": \"Hint for rich text field\",\n                \"layoutColumn\": 1,\n                \"imagepickerType\": \"images\",\n                \"imagepickerNodetypes\": [\n                    \"folder\",\n                    \"banner\"\n                ],\n                \"imagepickerLastVisitedEnabled\": true,\n                \"imagepickerLastVisitedGroupKey\": \"ckeditor-imagepicker\",\n                \"imagepickerLastVisitedNodetypes\": [\n                    \"gallery\",\n                    \"banner\"\n                ],\n                \"imagepickerPreferredImageVariant\": \"original\",\n                \"imagepickerBasePath\": \"/content/gallery/brxsaas/images\",\n                \"linkpickerType\": \"documents\",\n                \"linkpickerNodetypes\": [\n                    \"folder\",\n                    \"banner\"\n                ],\n                \"linkpickerLastVisitedEnabled\": true,\n                \"linkpickerLastVisitedGroupKey\": \"ckeditor-linkpicker\",\n                \"linkpickerLastVisitedNodetypes\": [\n                    \"folder\"\n                ],\n                \"linkPickerLanguageContextAware\": true,\n                \"linkPickerOpenInNewWindowEnabled\": true\n            }\n        },\n        {\n            \"name\": \"dropdownWithStaticValues\",\n            \"required\": true,\n            \"type\": \"SelectableString\",\n            \"defaultValue\": [\n                \"01\"\n            ],\n            \"validations\": {\n                \"inValues\": [\n                    {\n                        \"key\": \"01\",\n                        \"label\": \"New\"\n                    },\n                    {\n                        \"key\": \"02\",\n                        \"label\": \"Open\"\n                    },\n                    {\n                        \"key\": \"03\",\n                        \"label\": \"Closed\"\n                    }\n                ]\n            },\n            \"presentation\": {\n                \"caption\": \"Static dropdown Field\",\n                \"hint\": \"Hint for dropdown field\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"Dropdown\"\n            }\n        },\n        {\n            \"name\": \"staticRadiogroupOnBoolean\",\n            \"required\": false,\n            \"type\": \"Boolean\",\n            \"defaultValue\": [\n                \"false\"\n            ],\n            \"validations\": {\n                \"inValues\": [\n                    \"Open\",\n                    \"Closed\"\n                ]\n            },\n            \"presentation\": {\n                \"caption\": \"Radiogroup field\",\n                \"hint\": \"Hint for static radiogroup field on boolean\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"RadioGroup\"\n            }\n        },\n        {\n            \"name\": \"imageLink\",\n            \"required\": false,\n            \"type\": \"Link\",\n            \"defaultValue\": [\n                \"/\"\n            ],\n            \"presentation\": {\n                \"caption\": \"Image\",\n                \"hint\": \"Hint for image link field\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"ImageLink\",\n                \"lastVisitedKey\": \"gallerypicker-imagelink\",\n                \"lastVisitedEnabled\": true,\n                \"uploadEnabled\": true\n            }\n        },\n        {\n            \"name\": \"link\",\n            \"required\": false,\n            \"type\": \"Link\",\n            \"defaultValue\": [\n                \"/content/documents/brxsaas/pages/about\"\n            ],\n            \"presentation\": {\n                \"caption\": \"Link\",\n                \"hint\": \"Hint for link field\",\n                \"layoutColumn\": 2,\n                \"displayType\": \"AnyLink\",\n                \"lookupFolderPath\": \"/content/documents/brxsaas/banners\",\n                \"lookupFolderTypes\": [\n                    \"folder\"\n                ],\n                \"lastVisitedNodetypes\": [\n                    \"folder\"\n                ],\n                \"lastVisitedEnabled\": true,\n                \"languageContextAware\": true,\n                \"pickerType\": \"documents\"\n            }\n        },\n        {\n            \"name\": \"resource\",\n            \"required\": true,\n            \"type\": \"EmbeddedResource\",\n            \"defaultValue\": [\n                {\n                    \"filename\": \"hippo:resource\",\n                    \"binarydata\": \"/9j/4AAQSkZJRgABAQAAFAAUAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAAAUAAAAAQAAABQAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAAigAwAEAAAAAQAAAAUAAAAA/+0AOFBob3Rvc2hvcCAzLjAAOEJJTQQEAAAAAAAAOEJJTQQlAAAAAAAQ1B2M2Y8AsgTpgAmY7PhCfv/AABEIAAUACAMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/3QAEAAH/2gAMAwEAAhEDEQA/APrD4kfAXwl46KapdRwm7uHw0l9b/bDHkjPlFmDRjAxtB289OueI/wCGPPB3/P3p3/gmT/45X0Hdf8eVr/11FNrCtlmGrTc5J38pSX4JpG1PGVYxS0frGLf3tNn/2Q==\",\n                    \"mimeType\": \"application/json\"\n                }\n            ],\n            \"presentation\": {\n                \"caption\": \"Resource Field\",\n                \"hint\": \"Hint for resource field\",\n                \"layoutColumn\": 2\n            }\n        }\n    ]\n}"
+            },
+            "url": {
+              "raw": "{{brxHost}}/management/contenttypes/v1/development/firstExample",
+              "host": [
+                "{{brxHost}}"
+              ],
+              "path": [
+                "management",
+                "contenttypes",
+                "v1",
+                "development",
+                "firstExample"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Put content type (second example)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var version = postman.getResponseHeader(\"X-Resource-Version\");",
+                  "pm.environment.set(\"contentTypeSecondExampleVersion\", version);",
+                  "postman.setEnvironmentVariable(\"contentTypeSecondExampleVersion\", version);"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "var version = pm.environment.get(\"contentTypeSecondExampleVersion\");",
+                  "if(version != null){",
+                  "    pm.request.headers.add({",
+                  "        key: \"X-Resource-Version\",",
+                  "        value: version",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"secondExample\",\n    \"type\": \"Document\",\n    \"enabled\": true,\n    \"presentation\": {\n        \"layout\": \"two-column\",\n        \"displayName\": \"First Example\"\n    },\n    \"fields\": [\n        {\n            \"name\": \"dropdownWithResourceBundle\",\n            \"required\": true,\n            \"type\": \"SelectableString\",\n            \"defaultValue\": [\n                \"key1\"\n            ],\n            \"validations\": {\n                \"inResourceBundle\": \"brsm.example.bundle\"\n            },\n            \"presentation\": {\n                \"caption\": \"Dynamic dropdown field\",\n                \"hint\": \"Hint for dynamic dropdown field\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"Dropdown\",\n                \"sortOrder\": \"ascending\",\n                \"sortBy\": \"key\",\n                \"showDefault\": true\n            }\n        },\n        {\n            \"name\": \"radiogroup\",\n            \"required\": true,\n            \"type\": \"SelectableString\",\n            \"validations\": {\n                \"inResourceBundle\": \"brsm.example.bundle\"\n            },\n            \"presentation\": {\n                \"caption\": \"Radiogroup field\",\n                \"hint\": \"Hint for radio group field\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"RadioGroup\",\n                \"orientation\": \"horizontal\"\n            }\n        },\n        {\n            \"name\": \"radiogroupOnBoolean\",\n            \"required\": true,\n            \"type\": \"Boolean\",\n            \"defaultValue\": [\n                \"false\"\n            ],\n            \"validations\": {\n                \"inResourceBundle\": \"boolean.resource.bundle\"\n            },\n            \"presentation\": {\n                \"caption\": \"Radiogroup field\",\n                \"hint\": \"Hint for radiogroup field on boolean\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"RadioGroup\",\n                \"orientation\": \"vertical\"\n            }\n        },\n        {\n            \"name\": \"multiselectfieldWithResourceBundle\",\n            \"required\": true,\n            \"multiple\": true,\n            \"type\": \"SelectableString\",\n            \"defaultValue\": [\n                \"key1\",\n                \"key2\"\n            ],\n            \"validations\": {\n                \"inResourceBundle\": \"brsm.example.bundle\"\n            },\n            \"presentation\": {\n                \"caption\": \"Multiselect field\",\n                \"hint\": \"Hint for mmultiselect field with resource bundle\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"MultiSelect\",\n                \"multiSelectType\": \"selectlist\",\n                \"maxRowWithoutScrollbar\": 2,\n                \"multiSelectAllowOrder\": true\n            }\n        },\n        {\n            \"name\": \"taxonomyField\",\n            \"required\": true,\n            \"multiple\": true,\n            \"type\": \"Taxonomy\",\n            \"defaultValue\": [\n                \"category1\"\n            ],\n            \"validations\": {\n                \"inTaxonomy\": \"testTaxonomy\"\n            },\n            \"presentation\": {\n                \"caption\": \"Taxonomy Field\",\n                \"hint\": \"Hint for Taxonomy field\",\n                \"layoutColumn\": 2\n            }\n        }\n    ]\n}"
+            },
+            "url": {
+              "raw": "{{brxHost}}/management/contenttypes/v1/development/secondExample",
+              "host": [
+                "{{brxHost}}"
+              ],
+              "path": [
+                "management",
+                "contenttypes",
+                "v1",
+                "development",
+                "secondExample"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Put fieldgroup aFieldGroupType",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"aFieldGroupType\",\n    \"type\": \"FieldGroup\",\n    \"enabled\": true,\n    \"presentation\": {\n        \"layout\": \"one-column\",\n        \"displayName\": \"A Field Group Type\"\n    },\n    \"fields\": [\n        {\n            \"name\": \"title\",\n            \"type\": \"String\",\n            \"required\": false,\n            \"multiple\": false,\n            \"presentation\": {\n                \"caption\": \"Title\",\n                \"hint\": \"\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"Simple\"\n            },\n            \"validations\": {\n                \"maxLength\": null\n            },\n            \"defaultValue\": [\n                \"A default title\"\n            ]\n        },\n        {\n            \"name\": \"calendardate\",\n            \"type\": \"Date\",\n            \"required\": false,\n            \"multiple\": false,\n            \"presentation\": {\n                \"caption\": \"Calendar Date\",\n                \"hint\": \"\",\n                \"layoutColumn\": 1,\n                \"timeSelectable\": false\n            },\n            \"defaultValue\": [\n                \"2021-10-06T22:00:00Z\"\n            ]\n        }\n    ]\n}"
+            },
+            "url": {
+              "raw": "{{brxHost}}/management/contenttypes/v1/development/aFieldGroupType",
+              "host": [
+                "{{brxHost}}"
+              ],
+              "path": [
+                "management",
+                "contenttypes",
+                "v1",
+                "development",
+                "aFieldGroupType"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Put fieldgroup aFieldGroupWithFieldGroupType",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"aFieldGroupWithFieldGroupType\",\n    \"type\": \"FieldGroup\",\n    \"enabled\": true,\n    \"presentation\": {\n        \"layout\": \"one-column\",\n        \"displayName\": \"A Field Group With Field Group Type\"\n    },\n    \"fields\": [\n        {\n            \"name\": \"title\",\n            \"type\": \"String\",\n            \"required\": false,\n            \"multiple\": false,\n            \"presentation\": {\n                \"caption\": \"Title\",\n                \"hint\": \"\",\n                \"layoutColumn\": 1,\n                \"displayType\": \"Simple\"\n            },\n            \"validations\": {\n                \"maxLength\": null\n            },\n            \"defaultValue\": [\n                \"Top level title\"\n            ]\n        },\n        {\n            \"name\": \"aFieldGroupField\",\n            \"type\": \"FieldGroup\",\n            \"required\": false,\n            \"multiple\": false,\n            \"presentation\": {\n                \"caption\": \"A FieldGroup field\",\n                \"hint\": \"\",\n                \"layoutColumn\": 1\n            },\n            \"defaultValue\": [\n                {\n                    \"fields\": {\n                        \"title\": [\n                            \"A different default title\"\n                        ],\n                        \"calendardate\": [\n                            \"2022-02-08T23:00:00Z\"\n                        ]\n                    }\n                }\n            ],\n            \"fieldGroupType\": \"aFieldGroupType\"\n        }\n    ]\n}"
+            },
+            "url": {
+              "raw": "{{brxHost}}/management/contenttypes/v1/development/aFieldGroupWithFieldGroupType",
+              "host": [
+                "{{brxHost}}"
+              ],
+              "path": [
+                "management",
+                "contenttypes",
+                "v1",
+                "development",
+                "aFieldGroupWithFieldGroupType"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Put content type (third example)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var version = postman.getResponseHeader(\"X-Resource-Version\");",
+                  "pm.environment.set(\"contentTypeThirdExampleVersion\", version);",
+                  "postman.setEnvironmentVariable(\"contentTypeThirdExampleVersion\", version);"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "var version = pm.environment.get(\"contentTypeThirdExampleVersion\");",
+                  "if(version != null){",
+                  "    pm.request.headers.add({",
+                  "        key: \"X-Resource-Version\",",
+                  "        value: version",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"thirdExample\",\n    \"type\": \"Document\",\n    \"enabled\": true,\n    \"presentation\": {\n        \"layout\": \"two-column\",\n        \"displayName\": \"Third Example\"\n    },\n    \"fields\": [\n        {\n            \"name\": \"aFieldGroupField\",\n            \"type\": \"FieldGroup\",\n            \"required\": false,\n            \"multiple\": false,\n            \"fieldGroupType\": \"aFieldGroupType\",\n            \"presentation\": {\n                \"caption\": \"A FieldGroup field\",\n                \"hint\": \"Hint for FieldGroup field\",\n                \"layoutColumn\": 1\n            },\n            \"defaultValue\": [\n                {\n                    \"fields\": {\n                        \"title\": [\n                            \"A default title\"\n                        ],\n                        \"calendardate\": [\n                            \"2021-10-06T22:00:00Z\"\n                        ]\n                    }\n                }\n            ]\n        },\n        {\n            \"name\": \"aFieldGroupWithFieldGroupField\",\n            \"type\": \"FieldGroup\",\n            \"required\": false,\n            \"multiple\": false,\n            \"fieldGroupType\": \"aFieldGroupWithFieldGroupType\",\n            \"presentation\": {\n                \"caption\": \"A FieldGroupWithFieldGroup field\",\n                \"hint\": \"Hint for FieldGroupWithFieldGroup field\",\n                \"layoutColumn\": 1\n            },\n            \"defaultValue\": [\n                {\n                    \"fields\": {\n                        \"aFieldGroupField\": [\n                            {\n                                \"fields\": {\n                                    \"title\": [\n                                        \"A different default title\"\n                                    ],\n                                    \"calendardate\": [\n                                        \"2022-02-08T23:00:00Z\"\n                                    ]\n                                }\n                            }\n                        ],\n                        \"title\": [\n                            \"Top level title\"\n                        ]\n                    }\n                }\n            ]\n        },\n        {\n            \"name\": \"aSelectableFieldGroupField\",\n            \"type\": \"SelectableFieldGroup\",\n            \"required\": false,\n            \"multiple\": true,\n            \"fieldGroupTypes\": [\n                \"aFieldGroupType\",\n                \"aFieldGroupWithFieldGroupType\"\n            ],\n            \"presentation\": {\n                \"caption\": \"A SelectableFieldGroup field\",\n                \"hint\": \"Hint for SelectableFieldGroup field\",\n                \"layoutColumn\": 1,\n                \"contentPickerType\": \"links\",\n                \"showFieldGroupNames\": false\n            },\n            \"validations\": {\n                \"maxItem\": 10\n            },\n            \"defaultValue\": [\n                {\n                    \"fieldGroupType\": \"aFieldGroupType\",\n                    \"fields\": {\n                        \"title\": [\n                            \"A default title\"\n                        ],\n                        \"calendardate\": [\n                            \"2021-10-06T22:00:00Z\"\n                        ]\n                    }\n                },\n                {\n                    \"fieldGroupType\": \"aFieldGroupWithFieldGroupType\",\n                    \"fields\": {\n                        \"aFieldGroupField\": [\n                            {\n                                \"fields\": {\n                                    \"title\": [\n                                        \"A different default title\"\n                                    ],\n                                    \"calendardate\": [\n                                        \"2022-02-08T23:00:00Z\"\n                                    ]\n                                }\n                            }\n                        ],\n                        \"title\": [\n                            \"Top level title\"\n                        ]\n                    }\n                }\n            ]\n        }\n    ]\n}"
+            },
+            "url": {
+              "raw": "{{brxHost}}/management/contenttypes/v1/development/thirdExample",
+              "host": [
+                "{{brxHost}}"
+              ],
+              "path": [
+                "management",
+                "contenttypes",
+                "v1",
+                "development",
+                "thirdExample"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "value",
+        "value": "changeme",
+        "type": "string"
+      },
+      {
+        "key": "key",
+        "value": "x-auth-token",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
 }
